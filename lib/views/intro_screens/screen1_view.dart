@@ -1,4 +1,5 @@
 import 'package:devcare_frontend/utils/RouteConstants.dart';
+import 'package:devcare_frontend/utils/SharedPrefs.dart';
 import 'package:devcare_frontend/views/intro_screens/screen2_view.dart';
 import 'package:flutter/material.dart';
 
@@ -88,8 +89,24 @@ class Screen1View extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
                   child: TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, RouteConstants.landingViewRoute);
+                    onPressed: () async {
+                      await SharedPrefs().getAllValues().then((value) => {
+                            if (value['token'] == '')
+                              {
+                                Navigator.pushNamed(
+                                    context, RouteConstants.landingViewRoute)
+                              }
+                            else if (value['isUserNew'] == 'true')
+                              {
+                                Navigator.pushNamed(context,
+                                    RouteConstants.emergencyContactsViewRoute)
+                              }
+                            else
+                              {
+                                Navigator.pushNamed(
+                                    context, RouteConstants.mainViewRoute)
+                              }
+                          });
                     },
                     child: const Text(
                       'Skip Tour',

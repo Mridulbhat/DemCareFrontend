@@ -7,6 +7,7 @@ class ApiResponse<T> {
 
   ApiResponse(this.status, this.data, this.message);
 
+  ApiResponse.preCall() : status = Status.PRECALL;
   ApiResponse.loading() : status = Status.LOADING;
   ApiResponse.completed(this.data) : status = Status.COMPLETED;
   ApiResponse.error(this.message) : status = Status.ERROR;

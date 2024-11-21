@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:devcare_frontend/model/response/Todos.dart';
 
 class User {
@@ -13,6 +15,7 @@ class User {
   String? updatedAt;
   int? iV;
   List<Todos>? todos;
+  PermanentLocation? permanentLocation;
 
   User(
       {this.sId,
@@ -26,7 +29,8 @@ class User {
       this.emergencyContacts,
       this.updatedAt,
       this.iV,
-      this.todos});
+      this.todos,
+      this.permanentLocation});
 
   User.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -51,6 +55,7 @@ class User {
         todos!.add(new Todos.fromJson(v));
       });
     }
+    permanentLocation = PermanentLocation.fromJson(json['permanentLocation']);
   }
 
   Map<String, dynamic> toJson() {
@@ -72,6 +77,7 @@ class User {
     if (this.todos != null) {
       data['todos'] = this.todos!.map((v) => v.toJson()).toList();
     }
+    data['permanentLocation'] = this.permanentLocation!.toJson();
     return data;
   }
 }
@@ -79,13 +85,15 @@ class User {
 class EmergencyContacts {
   String? contactName;
   String? contactNumber;
+  String? contactEmail;
   String? sId;
 
-  EmergencyContacts({this.contactName, this.contactNumber, this.sId});
+  EmergencyContacts({this.contactName, this.contactNumber, this.contactEmail, this.sId});
 
   EmergencyContacts.fromJson(Map<String, dynamic> json) {
     contactName = json['contactName'];
     contactNumber = json['contactNumber'];
+    contactEmail = json['contactEmail'];
     sId = json['_id'];
   }
 
@@ -93,7 +101,27 @@ class EmergencyContacts {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['contactName'] = this.contactName;
     data['contactNumber'] = this.contactNumber;
+    data['contactEmail'] = this.contactEmail;
     data['_id'] = this.sId;
+    return data;
+  }
+}
+
+class PermanentLocation {
+  double? latitude;
+  double? longitude;
+
+  PermanentLocation({this.latitude, this.longitude});
+
+  PermanentLocation.fromJson(Map<String, dynamic> json) {
+    latitude = json['latitude'].toDouble();
+    longitude = json['longitude'].toDouble();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['latitude'] = this.latitude;
+    data['longitude'] = this.longitude;
     return data;
   }
 }

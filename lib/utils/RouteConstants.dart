@@ -9,5 +9,10 @@ class RouteConstants {
   static var otpViewRoute = '$landingViewRoute/otp-verification';
   static var emergencyContactsViewRoute = '$landingViewRoute/update-emergency-contacts';
 
-  static var homeViewRoute = '/home';
+  static var mainViewRoute = '/main';
+  static var homeViewRoute = '/main/todo';
+  static var allGameViewRoute = '/main/games';
+  static var gameViewRoute = '/main/games/game';
+  static var videosViewRoute = '/main/videos';
+  static var videoPlayRoute = '/main/videos/video';
 }

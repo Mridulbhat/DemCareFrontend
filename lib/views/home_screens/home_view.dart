@@ -1,4 +1,5 @@
 import 'package:devcare_frontend/data/response/api_response.dart';
+import 'package:devcare_frontend/data/response/status.dart';
 import 'package:devcare_frontend/model/response/GetAllTodoResponse.dart';
 import 'package:devcare_frontend/model/response/Todos.dart';
 import 'package:devcare_frontend/res/addTodoDialog.dart';
@@ -18,6 +19,7 @@ class HomeView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: Container(),
         actions: [
           Icon(
             Icons.notifications,
@@ -46,49 +48,60 @@ class HomeView extends StatelessWidget {
                 Container(
                   height: 116,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEDECF4),
+                    color: Colors.blueGrey.shade100,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Align(
-                    alignment: Alignment.centerLeft,
+                  child: Center(
                     child: Padding(
-                      padding: EdgeInsets.only(
-                          left: 16.0), // Optional: Add some padding on the left
-                      child: Text(
-                        'TO-DO LIST',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 44,
-                          fontWeight: FontWeight.w500,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 8.0),
+                      child: ListTile(
+                        title: const Text(
+                          'TO-DO LIST',
+                          style: TextStyle(
+                            color: Color(0xFF432C81),
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        trailing: Image.asset(
+                          'assets/images/todo.png',
+                          height: 60,
                         ),
                       ),
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Icon(
-                      Icons.star,
-                      color: Color(0xFFDFB300),
-                    ),
-                    ElevatedButton(
-                      child: Icon(Icons.refresh_rounded),
-                      onPressed: () async {
-                        // Fetch latest to-dos when the refresh button is pressed
-                        await viewModel.fetchUserTodos(userPreference);
-                      },
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Icon(
+                        Icons.star,
+                        color: Color(0xFFDFB300),
+                      ),
+                      ElevatedButton(
+                        child: Icon(Icons.refresh_rounded),
+                        onPressed: () async {
+                          // Fetch latest to-dos when the refresh button is pressed
+                          await viewModel.fetchUserTodos(userPreference);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 Expanded(
-                  child: (viewModel.groupedTodos.isEmpty)
+                  child: (viewModel.getAllTodoResponse.status == Status.PRECALL)
                       ? FutureBuilder<ApiResponse<GetAllTodoResponse>>(
                           future: viewModel.fetchUserTodos(userPreference),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return const CircularProgressIndicator();
+                              return Container(
+                                  height: 100,
+                                  width: 100,
+                                  child: const CircularProgressIndicator());
                             } else if (snapshot.hasError) {
                               return const Text("Error fetching to-dos");
                             } else if (!snapshot.hasData ||
@@ -120,6 +133,7 @@ class HomeView extends StatelessWidget {
           );
         },
         child: Icon(Icons.add),
+        backgroundColor: Colors.blueGrey.shade100,
       ),
     );
   }

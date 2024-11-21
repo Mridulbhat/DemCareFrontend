@@ -129,7 +129,7 @@ class LoginView extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, RouteConstants.signupViewRoute);
+                            Navigator.popAndPushNamed(context, RouteConstants.signupViewRoute);
                           },
                           child: const Text(
                             'Sign Up',

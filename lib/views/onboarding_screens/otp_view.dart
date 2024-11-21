@@ -142,7 +142,7 @@ class OtpView extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            viewModel.submitForm().then((response) {
+                            viewModel.submitForm(userPreference).then((response) {
                               if (response.status == Status.COMPLETED) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text('OTP Sent')),

@@ -2,6 +2,7 @@ import 'package:devcare_frontend/data/response/status.dart';
 import 'package:devcare_frontend/res/colors.dart';
 import 'package:devcare_frontend/res/primaryButton.dart';
 import 'package:devcare_frontend/utils/RouteConstants.dart';
+import 'package:devcare_frontend/utils/SharedPrefs.dart';
 import 'package:devcare_frontend/views/onboarding_screens/signup_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,7 @@ class SignupView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<SignupViewModel>(context);
+    final userPreference = Provider.of<SharedPrefs>(context, listen: false);
 
     return Scaffold(
       body: SafeArea(
@@ -168,7 +170,7 @@ class SignupView extends StatelessWidget {
                       child: PrimaryButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            viewModel.submitForm().then((response) {
+                            viewModel.submitForm(userPreference).then((response) {
                               if (viewModel.signupResponse.status == Status.COMPLETED) {
                                 if (viewModel.signupResponse.data?.status == 'Successful') {
                                   Navigator.pushNamed(
@@ -210,7 +212,9 @@ class SignupView extends StatelessWidget {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.popAndPushNamed(context, RouteConstants.loginViewRoute);
+                          },
                           child: const Text(
                             'Login',
                             style: TextStyle(
