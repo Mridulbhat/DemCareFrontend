@@ -189,7 +189,7 @@ class OtpView extends StatelessWidget {
                                             0
                                         ? RouteConstants
                                             .emergencyContactsViewRoute
-                                        : RouteConstants.homeViewRoute);
+                                        : RouteConstants.mainViewRoute);
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(

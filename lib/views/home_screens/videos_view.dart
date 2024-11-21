@@ -39,7 +39,7 @@ class VideosView extends StatelessWidget {
       'https://youtu.be/cMfChJLqma4?si=rhYLuQfbFv2Tay6e',
       'https://youtu.be/sSiA25XlG_A?si=pPn5Wysyyn6t2B-u',
       'https://youtu.be/laIWV6qJWbk?si=x-th1-oPVyPw4ora',
-      'https://youtu.be/brjAjq4zEIE?si=F7ZytyA3qsxQSty0',
+      'https://youtu.be/VVwcEjVohgw?si=anAddNYbtpgMY8D_',
     ];
 
     return Scaffold(
