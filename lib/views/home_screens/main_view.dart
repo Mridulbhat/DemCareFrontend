@@ -47,11 +47,10 @@ class MainView extends StatelessWidget {
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-                child: CircleAvatar(
-                  child: Image.asset(
-                    'assets/images/avatar.png',
-                    height: 390,
-                  ),
+                child: Icon(
+                  Icons.logout_rounded,
+                  size: 35,
+                  color: Colors.grey.shade600,
                 ),
               ),
             ),
@@ -97,7 +96,7 @@ class MainView extends StatelessWidget {
                                     return const Text(
                                         "Error fetching location");
                                   }
-            
+
                                   return Text(
                                     (viewModel.distanceInKiloMeters == null)
                                         ? 'Calculating Distance...'
@@ -286,11 +285,11 @@ class MainView extends StatelessWidget {
                           horizontal: 8.0, vertical: 8.0),
                       child: ListTile(
                         onTap: () {
-                          // Navigator.pushNamed(
-                          //     context, RouteConstants.homeViewRoute);
+                          Navigator.pushNamed(
+                              context, RouteConstants.notesViewRoute);
                         },
                         title: const Text(
-                          'THERAPY',
+                          'DIARY',
                           style: TextStyle(
                             color: Color(0xFF432C81),
                             fontSize: 22,

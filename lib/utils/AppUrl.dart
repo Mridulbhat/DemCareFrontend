@@ -1,5 +1,5 @@
 class AppUrl {
-  static var baseUrl = 'http://192.168.0.101:5010/api';
+  static var baseUrl = 'http://192.168.206.103:5010/api';
 
   static var signupUrl = '$baseUrl/signup';
   static var loginUrl = '$baseUrl/login';

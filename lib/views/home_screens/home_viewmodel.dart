@@ -252,7 +252,7 @@ class HomeViewModel extends ChangeNotifier {
               'message':
                   'I am ${_distanceInKiloMeters} km away from my home at the following location: Latitude ${currentLocation.latitude}, Longitude ${currentLocation.longitude}. Please check on me.'
             };
-          _postEmailSentResponse = ApiResponse.loading();
+            _postEmailSentResponse = ApiResponse.loading();
             await _userRepository
                 .sendEmergencyEmails(token, data)
                 .then((value) => {
@@ -297,6 +297,33 @@ class HomeViewModel extends ChangeNotifier {
     LocationData userLocationData = await location.getLocation();
 
     return userLocationData;
+  }
+
+  bool animateMicButton = false;
+  setAnimateMicButton(bool value) {
+    animateMicButton = value;
+    notifyListeners();
+  }
+
+  String recogText = "";
+  String displayText = "";
+  setRecogText(String value) {
+    print(value);
+    recogText = value;
+    notifyListeners();
+  }
+
+  setDisplaytext() {
+    if (recogText != "") {
+      displayText = displayText + "\n" + recogText;
+      recogText = "";
+      notifyListeners();
+    }
+  }
+
+  nullDisplayText() {
+    displayText = "";
+    notifyListeners();
   }
 
   @override

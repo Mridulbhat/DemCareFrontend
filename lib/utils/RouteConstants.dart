@@ -15,4 +15,5 @@ class RouteConstants {
   static var gameViewRoute = '/main/games/game';
   static var videosViewRoute = '/main/videos';
   static var videoPlayRoute = '/main/videos/video';
+  static var notesViewRoute = '/main/notes';
 }

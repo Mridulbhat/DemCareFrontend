@@ -1,4 +1,5 @@
 import 'package:devcare_frontend/views/home_screens/game_view.dart';
+import 'package:devcare_frontend/views/home_screens/notes_view.dart';
 import 'package:devcare_frontend/views/home_screens/videoplay_view.dart';
 import 'package:devcare_frontend/views/home_screens/videos_view.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +66,8 @@ class MyApp extends StatelessWidget {
           return MaterialPageRoute(builder: (context) => MainView());
         } else if (settings.name == RouteConstants.allGameViewRoute) {
           return MaterialPageRoute(builder: (context) => GamesView());
+        } else if (settings.name == RouteConstants.notesViewRoute) {
+          return MaterialPageRoute(builder: (context) => NotesView());
         } else if (settings.name == RouteConstants.homeViewRoute) {
           return MaterialPageRoute(builder: (context) => HomeView());
         } else if (settings.name == RouteConstants.gameViewRoute) {
